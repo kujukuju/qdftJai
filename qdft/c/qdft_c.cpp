@@ -18,18 +18,18 @@ int64_t get_bins(QDFT qdft) {
     return (int64_t) ((qdft::QDFT<float, double>*) qdft)->size();
 }
 
-void process_sample(QDFT qdft, float input, Complex* output) {
+void process_sample(QDFT qdft, float input, QDFTComplex* output) {
     ((qdft::QDFT<float, double>*) qdft)->qdft(input, (std::complex<double>*) output);
 }
 
-void process_samples(QDFT qdft, int64_t num_samples, float* input, Complex* output) {
+void process_samples(QDFT qdft, int64_t num_samples, float* input, QDFTComplex* output) {
     ((qdft::QDFT<float, double>*) qdft)->qdft(num_samples, input, (std::complex<double>*) output);
 }
 
-float invert_sample(QDFT qdft, Complex* output) {
+float invert_sample(QDFT qdft, QDFTComplex* output) {
     return ((qdft::QDFT<float, double>*) qdft)->iqdft((std::complex<double>*) output);
 }
 
-void invert_samples(QDFT qdft, int64_t num_samples, Complex* input, float* output) {
+void invert_samples(QDFT qdft, int64_t num_samples, QDFTComplex* input, float* output) {
     ((qdft::QDFT<float, double>*) qdft)->iqdft(num_samples, (std::complex<double>*) input, output);
 }

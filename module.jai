@@ -6,7 +6,7 @@
 
 
 
-Complex :: struct {
+QDFTComplex :: struct {
     r: float64;
     i: float64;
 }
@@ -19,34 +19,34 @@ delete_qdft :: (qdft: QDFT) -> void #foreign qdft;
 
 get_bins :: (qdft: QDFT) -> s64 #foreign qdft;
 
-process_sample :: (qdft: QDFT, input: float, output: *Complex) -> void #foreign qdft;
+process_sample :: (qdft: QDFT, input: float, output: *QDFTComplex) -> void #foreign qdft;
 
-process_samples :: (qdft: QDFT, num_samples: s64, input: *float, output: *Complex) -> void #foreign qdft;
+process_samples :: (qdft: QDFT, num_samples: s64, input: *float, output: *QDFTComplex) -> void #foreign qdft;
 
-invert_sample :: (qdft: QDFT, output: *Complex) -> float #foreign qdft;
+invert_sample :: (qdft: QDFT, output: *QDFTComplex) -> float #foreign qdft;
 
-invert_samples :: (qdft: QDFT, num_samples: s64, input: *Complex, output: *float) -> void #foreign qdft;
+invert_samples :: (qdft: QDFT, num_samples: s64, input: *QDFTComplex, output: *float) -> void #foreign qdft;
 
 #scope_file
 
 #import "Basic"; // For assert
 
-qdft :: #library,no_dll "bin/win/qdft";
+qdft :: #library "bin/win/qdft";
 
 #run {
     {
-        info := type_info(Complex);
+        info := type_info(QDFTComplex);
         for info.members {
             if it.name == {
                 case "r";
-                    assert(it.offset_in_bytes == 0, "Complex.r has unexpected offset % instead of 0", it.offset_in_bytes);
-                    assert(it.type.runtime_size == 8, "Complex.r has unexpected size % instead of 8", it.type.runtime_size);
+                    assert(it.offset_in_bytes == 0, "QDFTComplex.r has unexpected offset % instead of 0", it.offset_in_bytes);
+                    assert(it.type.runtime_size == 8, "QDFTComplex.r has unexpected size % instead of 8", it.type.runtime_size);
                 case "i";
-                    assert(it.offset_in_bytes == 8, "Complex.i has unexpected offset % instead of 8", it.offset_in_bytes);
-                    assert(it.type.runtime_size == 8, "Complex.i has unexpected size % instead of 8", it.type.runtime_size);
+                    assert(it.offset_in_bytes == 8, "QDFTComplex.i has unexpected offset % instead of 8", it.offset_in_bytes);
+                    assert(it.type.runtime_size == 8, "QDFTComplex.i has unexpected size % instead of 8", it.type.runtime_size);
             }
         }
-        assert(size_of(Complex) == 16, "Complex has size % instead of 16", size_of(Complex));
+        assert(size_of(QDFTComplex) == 16, "QDFTComplex has size % instead of 16", size_of(QDFTComplex));
     }
 }
 
