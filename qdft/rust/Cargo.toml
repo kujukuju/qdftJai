@@ -1,0 +1,18 @@
+[package]
+edition = "2021"
+name = "qdft"
+version = "0.1.0"
+authors = ["Juergen Hock <juergen.hock@jurihock.de>"]
+repository = "https://github.com/jurihock/qdft"
+description = "Constant-Q Sliding DFT"
+readme = "README.md"
+license = "MIT"
+keywords = ["cqt", "dft", "audio", "signal-processing", "spectrum"]
+categories = ["algorithms", "mathematics", "multimedia", "science"]
+
+[dependencies]
+num = "0.4.*"
+
+[dev-dependencies]
+ndarray = "0.15.*"
+ndarray-npy = "0.8.*"
